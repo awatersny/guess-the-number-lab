@@ -13,10 +13,14 @@ const game = {
   secretNum: null,
   prevGuesses: [],
   getGuess: function() {
-    let guess = prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`);
+    let guess = prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}:`);
 
-    while ((guess < this.smallestNum || guess > this.biggestNum) && guess !== null) {
-      guess = prompt(`Guess needs to be between ${this.smallestNum} and ${this.biggestNum}.  Try again.`);
+    while ((guess < this.smallestNum || guess > this.biggestNum || isNaN(parseInt(guess, 10))) && guess !== null) {
+      if (isNaN(parseInt(guess, 10))) {
+        guess = prompt(`"${guess}" is not a number!  Try again:`);
+      } else {
+        guess = prompt(`Guess needs to be between ${this.smallestNum} and ${this.biggestNum}.  Try again:`);
+      }
     }
 
     return parseInt(guess, 10);
