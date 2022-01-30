@@ -53,14 +53,20 @@ const game = {
       //     - Otherwise: `Your guess is too [high|low] Previous guesses: x, x, x
     } else {
       if (this.currGuess > this.secretNum) {
+        this.biggestNum = this.currGuess;
         relation = `high`;
       } else if (this.currGuess < this.secretNum) {
+        this.smallestNum = this.currGuess;
         relation = `low`;
       }
       alert(`Your guess is too ${relation} Previous guesses: ${this.prevGuesses}`);
     }
   }
 }
+
+// - If the player enters a number greater than the secretNum make it the new biggestNum, so that the player can't enter a number greater than it. If the player enters a number that is less than the secretNum make it the new smallestNum, so that the player can't enter a number less than it. Hint: You may want to add a helper function to accomplish this.
+
+// When play is run, immediately prompt the player to enter the smallest and biggest numbers instead of pre-setting values.
 
 // Completing the following tasks will result in a working *Guess the Number* game:
 
