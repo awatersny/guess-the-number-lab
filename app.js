@@ -13,6 +13,7 @@ const game = {
   secretNum: null,
   currGuess: null,
   prevGuesses: [],
+
   getGuess: function() {
     let guess = prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}:`);
 
@@ -29,21 +30,34 @@ const game = {
 
   play: function() {
     this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum;
-    this.currGuess = this.getGuess();
 
-    console.log(this.secretNum);
-
-    while (this.secretNum !== this.currGuess && !isNaN(this.currGuess)){
-      this.prevGuesses.push(this.currGuess);
+    do {
       this.currGuess = this.getGuess();
+      this.prevGuesses.push(this.currGuess);
+      this.render();
     }
-
+    while (this.secretNum !== this.currGuess && !isNaN(this.currGuess));
   },
 
   render: function() {
 
+    // End game when cancel is clicked
+    if (isNaN(this.currGuess)) return 0;
+
+    let relation = '';
+    //     - If the secret has been guessed: `Congrats! You guessed the number in [number of prevGuesses]!`
+    if (this.currGuess === this.secretNum) {
+      alert(`Congrats! You guessed the number in ${this.prevGuesses.length} guesses!`);
+      //     - Otherwise: `Your guess is too [high|low] Previous guesses: x, x, x
+    } else {
+      if (this.currGuess > this.secretNum) {
+        relation = `high`;
+      } else if (this.currGuess < this.secretNum) {
+        relation = `low`;
+      }
+      alert(`Your guess is too ${relation} Previous guesses: ${this.prevGuesses}`);
+    }
   }
-  
 }
 
 // Completing the following tasks will result in a working *Guess the Number* game:
@@ -77,5 +91,5 @@ const game = {
 
 // 6. The `play` method should end (`return`) when the guess matches `secretNum`.
 
-// console.log(game.getGuess());
-console.log(game.play());
+
+game.play();
