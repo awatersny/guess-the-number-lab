@@ -37,6 +37,8 @@ const game = {
       this.render();
     }
     while (this.secretNum !== this.currGuess && !isNaN(this.currGuess));
+
+    return 0;
   },
 
   render: function() {
