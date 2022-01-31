@@ -14,7 +14,7 @@ const game = {
   currGuess: null,
   prevGuesses: [],
 
-  getRange: function() {
+  setRange: function() {
     let firstNum = prompt(`Enter a starting number:`);
 
     //Proceed to default game on cancel.
@@ -66,7 +66,7 @@ const game = {
   },
 
   play: function() {
-    this.getRange();
+    this.setRange();
     this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum;
 
     do {
