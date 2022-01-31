@@ -16,13 +16,18 @@ const game = {
 
   getRange: function() {
     let firstNum = prompt(`Enter a number:`);
-    let secondNum = prompt(`Enter a second number that is not equal to the first`);
 
-    while (firstNum !== null && isNaN(parseInt(firstNum, 10))) {
+    if (firstNum === null) return 0;
+
+    while (isNaN(parseInt(firstNum, 10))) {
       firstNum = prompt(`"${firstNum}" is not a number!  Try again:`);
     }
 
-    while (secondNum !== null && (isNaN(parseInt(secondNum, 10)) || firstNum === secondNum)) {
+    let secondNum = prompt(`Enter a second number that is not equal to the first`);
+
+    if(secondNum === null) return 0;
+
+    while (isNaN(parseInt(secondNum, 10)) || firstNum === secondNum) {
       if (firstNum === secondNum) {
         secondNum = prompt(`"${secondNum}" Must not be equal to ${firstNum}!  Try again:`);
       } else {
@@ -33,12 +38,11 @@ const game = {
     if (firstNum < secondNum) {
       this.smallestNum = parseInt(firstNum, 10);
       this.biggestNum = parseInt(secondNum, 10);
+
     } else if (firstNum > secondNum) {
       this.smallestNum = parseInt(secondNum, 10);
       this.biggestNum = parseInt(firstNum, 10);
     }
-
-    alert('Range set!');
   },
 
   getGuess: function() {
@@ -56,9 +60,8 @@ const game = {
   },
 
   play: function() {
-    this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum;
-
     this.getRange();
+    this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum;
 
     do {
       this.currGuess = this.getGuess();
