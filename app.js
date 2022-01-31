@@ -14,6 +14,31 @@ const game = {
   currGuess: null,
   prevGuesses: [],
 
+  getRange: function() {
+    let firstNum = prompt(`Enter a number:`);
+    let secondNum = prompt(`Enter a second number that is not equal to the first`);
+
+    while (firstNum !== null && isNaN(parseInt(firstNum, 10))) {
+      firstNum = prompt(`"${firstNum}" is not a number!  Try again:`);
+    }
+
+    while (secondNum !== null && (isNaN(parseInt(secondNum, 10)) || firstNum === secondNum)) {
+      if (firstNum === secondNum) {
+        secondNum = prompt(`"${secondNum}" Must not be equal to ${firstNum}!  Try again:`);
+      } else {
+        secondNum = prompt(`"${secondNum}" is not a number!  Try again:`);
+      }
+    }
+
+    if (firstNum < secondNum) {
+      this.smallestNum = firstNum;
+      this.biggestNum = secondNum
+    } else if (firstNum > secondNum) {
+      this.smallestNum = secondNum;
+      this.biggestNum = firstNum;
+    }
+  },
+
   getGuess: function() {
     let guess = prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}:`);
 
@@ -98,6 +123,5 @@ const game = {
 
 
 // 6. The `play` method should end (`return`) when the guess matches `secretNum`.
-
 
 game.play();
