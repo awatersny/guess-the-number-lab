@@ -15,21 +15,27 @@ const game = {
   prevGuesses: [],
 
   getRange: function() {
-    let firstNum = prompt(`Enter a number:`);
+    let firstNum = prompt(`Enter a starting number:`);
 
+    //Proceed to default game on cancel.
     if (firstNum === null) return 0;
 
     while (isNaN(parseInt(firstNum, 10))) {
+      if (firstNum === null) return 0;
       firstNum = prompt(`"${firstNum}" is not a number!  Try again:`);
     }
 
-    let secondNum = prompt(`Enter a second number that is not equal to the first`);
+    let secondNum = prompt(`Enter an ending number that is not equal to the starting number:`);
 
+    //Proceed to default game on cancel.
     if(secondNum === null) return 0;
 
     while (isNaN(parseInt(secondNum, 10)) || firstNum === secondNum) {
+      //Proceed to default game on cancel.
+      if(secondNum === null) return 0;
+
       if (firstNum === secondNum) {
-        secondNum = prompt(`"${secondNum}" Must not be equal to ${firstNum}!  Try again:`);
+        secondNum = prompt(`Ending number must not be equal to ${firstNum}!  Try again:`);
       } else {
         secondNum = prompt(`"${secondNum}" is not a number!  Try again:`);
       }
