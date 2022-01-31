@@ -31,12 +31,14 @@ const game = {
     }
 
     if (firstNum < secondNum) {
-      this.smallestNum = firstNum;
-      this.biggestNum = secondNum
+      this.smallestNum = parseInt(firstNum, 10);
+      this.biggestNum = parseInt(secondNum, 10);
     } else if (firstNum > secondNum) {
-      this.smallestNum = secondNum;
-      this.biggestNum = firstNum;
+      this.smallestNum = parseInt(secondNum, 10);
+      this.biggestNum = parseInt(firstNum, 10);
     }
+
+    alert('Range set!');
   },
 
   getGuess: function() {
@@ -55,6 +57,8 @@ const game = {
 
   play: function() {
     this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum;
+
+    this.getRange();
 
     do {
       this.currGuess = this.getGuess();
